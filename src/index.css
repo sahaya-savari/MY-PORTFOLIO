@@ -1,0 +1,411 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Portfolio Design System - Dark/Light Theme Support */
+
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    
+    /* Portfolio specific colors */
+    --hero-gradient: linear-gradient(135deg, 240 100% 50%, 260 100% 60%);
+    --section-background: 240 4.8% 97.9%;
+    --glass-background: 0 0% 100% / 0.8;
+    --shadow-color: 240 3.8% 15.9% / 0.1;
+    --glow-color: 240 100% 50% / 0.3;
+    
+    /* Enhanced background patterns */
+    --bg-pattern: radial-gradient(circle at 25% 25%, hsl(240 100% 50% / 0.02) 0%, transparent 50%),
+                  radial-gradient(circle at 75% 75%, hsl(260 100% 60% / 0.02) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 0%, hsl(220 100% 55% / 0.015) 0%, transparent 50%);
+    --noise-pattern: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Dark theme */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    
+    /* Portfolio specific dark colors */
+    --hero-gradient: linear-gradient(135deg, 240 100% 50%, 260 100% 60%);
+    --section-background: 240 5.9% 10%;
+    --glass-background: 240 10% 3.9% / 0.8;
+    --shadow-color: 0 0% 0% / 0.3;
+    --glow-color: 240 100% 50% / 0.5;
+    
+    /* Enhanced dark background patterns */
+    --bg-pattern: radial-gradient(circle at 25% 25%, hsl(240 100% 50% / 0.03) 0%, transparent 50%),
+                  radial-gradient(circle at 75% 75%, hsl(260 100% 60% / 0.03) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 100%, hsl(220 100% 55% / 0.02) 0%, transparent 50%);
+    --noise-pattern: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    scroll-behavior: smooth;
+    /* Enhanced background with subtle patterns */
+    background-image: var(--bg-pattern), var(--noise-pattern);
+    background-attachment: fixed;
+    background-size: 100% 100%, 256px 256px;
+    min-height: 100vh;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+  
+  .glass-card {
+    /* True glassmorphism with semi-transparent background */
+    background: hsl(var(--glass-background));
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    /* Soft border with subtle glow */
+    border: 1px solid hsl(var(--border) / 0.5);
+    /* Enhanced glass effect with subtle shadows */
+    box-shadow: 
+      inset 0 1px 0 0 hsl(var(--background) / 0.1),
+      0 8px 32px 0 hsl(var(--shadow-color)),
+      0 2px 8px 0 hsl(var(--shadow-color));
+    /* Smooth transitions for hover effects */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Hover glow effect for glass cards */
+  .glass-card:hover {
+    border-color: hsl(var(--border) / 0.8);
+    box-shadow: 
+      inset 0 1px 0 0 hsl(var(--background) / 0.15),
+      0 12px 40px 0 hsl(var(--glow-color)),
+      0 4px 12px 0 hsl(var(--shadow-color));
+    transform: translateY(-2px);
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px hsl(var(--glow-color));
+  }
+  
+  /* Enhanced hover glow for glass cards */
+  .glass-card.hover\:glow-effect:hover,
+  .glass-card:hover.hover\:glow-effect {
+    box-shadow: 
+      inset 0 1px 0 0 hsl(var(--background) / 0.15),
+      0 0 30px hsl(var(--glow-color)),
+      0 12px 40px 0 hsl(var(--glow-color)),
+      0 4px 12px 0 hsl(var(--shadow-color));
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(240 100% 50%), hsl(260 100% 60%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .skill-bar {
+    background: linear-gradient(90deg, hsl(240 100% 50%), hsl(260 100% 60%));
+    height: 8px;
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+  }
+  
+  /* Enhanced Profile Image Styles */
+  .profile-image-enhanced {
+    filter: contrast(1.1) brightness(1.05) saturate(1.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .profile-image-enhanced:hover {
+    filter: contrast(1.15) brightness(1.1) saturate(1.2);
+  }
+  
+  /* Profile container enhancements */
+  .profile-container {
+    position: relative;
+    background: 
+      radial-gradient(circle at 30% 30%, hsla(240, 100%, 70%, 0.1) 0%, transparent 60%),
+      radial-gradient(circle at 70% 70%, hsla(260, 100%, 70%, 0.1) 0%, transparent 60%),
+      conic-gradient(from 0deg at 50% 50%, 
+        hsla(240, 100%, 60%, 0.05) 0deg, 
+        hsla(260, 100%, 60%, 0.05) 90deg, 
+        hsla(280, 100%, 60%, 0.05) 180deg, 
+        hsla(240, 100%, 60%, 0.05) 270deg, 
+        hsla(240, 100%, 60%, 0.05) 360deg);
+  }
+  
+  /* Professional badge animation */
+  .professional-badge {
+    animation: subtlePulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes subtlePulse {
+    0%, 100% { transform: scale(1) translateY(0); opacity: 0.9; }
+    50% { transform: scale(1.05) translateY(-2px); opacity: 1; }
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+  
+  .animate-slide-in-up {
+    animation: slideInUp 0.6s ease-out;
+  }
+  
+  /* Enhanced background utilities */
+  .bg-mesh-gradient {
+    background: 
+      radial-gradient(at 40% 20%, hsl(240 100% 50% / 0.05) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsl(260 100% 60% / 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsl(220 100% 55% / 0.03) 0px, transparent 50%);
+  }
+  
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, hsl(var(--muted-foreground) / 0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  /* Touch optimizations */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px hsl(var(--glow-color));
+  }
+  to {
+    box-shadow: 0 0 30px hsl(var(--glow-color)), 0 0 40px hsl(var(--glow-color));
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Profile Image Styles */
+.profile-image-enhanced {
+  object-position: center 30%;
+  object-fit: cover;
+  filter: brightness(1.0) contrast(1.0) saturate(1.0);
+  transition: all 0.3s ease-in-out;
+  transform: scale(0.95);
+  /* Force perfect circular masking with no square edges */
+  border-radius: 50% !important;
+  background: hsl(var(--background));
+  /* Additional masking to prevent any square artifacts and text bleed-through */
+  clip-path: circle(50% at center);
+  /* Ensure solid background behind image */
+  box-shadow: inset 0 0 0 2px hsl(var(--background));
+}
+
+.profile-image-enhanced:hover {
+  transform: scale(1.0);
+  filter: brightness(1.02) contrast(1.05) saturate(1.02);
+}
+
+/* reCAPTCHA Styling */
+.g-recaptcha {
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.g-recaptcha:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark theme reCAPTCHA adjustments */
+.dark .g-recaptcha {
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark .g-recaptcha:hover {
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Form loading state */
+.form-loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.form-loading * {
+  cursor: wait !important;
+}
+
+/* Touch optimization for mobile */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Copyright Protection Styles */
+.copyright-protected {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Disable drag on images */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  pointer-events: none;
+}
+
+/* Allow interaction for clickable images */
+img.interactive {
+  pointer-events: auto;
+}
+
+/* Hidden copyright watermark */
+.copyright-watermark::after {
+  content: "© 2026 Sahaya Savari F";
+  position: fixed;
+  bottom: -50px;
+  right: -100px;
+  font-size: 8px;
+  opacity: 0.01;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Prevent text selection on sensitive content */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Copyright footer styles */
+footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+Disallow: /.env
+Disallow: /temp/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Sitemaps
+Sitemap: https://sahayasavari.web.app/sitemap.xml
+
+# Additional files
+Host: https://sahayasavari.web.app
+Crawl-delay: 10oglebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: *
+Allow: /

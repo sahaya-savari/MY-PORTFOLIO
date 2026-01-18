@@ -1,0 +1,19 @@
+/* TEAM */
+Developer: Sahaya Savari F
+Contact: sahayasavari [at] gmail.com
+Twitter: @itz_me_santhoz
+From: Madurai, Tamil Nadu, India
+
+/* THANKS */
+React Team for the amazing framework
+Tailwind CSS for the utility-first approach
+Framer Motion for smooth animations
+Radix UI for accessible components
+Vite for the blazing fast build tool
+
+/* SITE */
+Last update: 2025/08/03
+Language: English
+Doctype: HTML5
+IDE: Visual Studio Code
+Components: React, TypeScript, Tailwind CSS, Framer Motion
