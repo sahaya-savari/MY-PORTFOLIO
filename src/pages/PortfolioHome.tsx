@@ -1,158 +1,208 @@
-import emailjs from '@emailjs/browser';
-import { motion } from 'framer-motion';
-import { ArrowDown, Award, Code2, Download, ExternalLink, Github, GraduationCap, Instagram, Linkedin, Mail, MapPin, MessageCircle, Send, Twitter } from 'lucide-react';
-import React, { useState } from 'react';
-import { CopyrightFooter, CopyrightProtection } from '../components/CopyrightProtection';
-import { ParticleBackground } from '../components/ParticleBackground';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Input } from '../components/ui/input';
-import { Textarea } from '../components/ui/textarea';
-import { useToast } from '../hooks/use-toast';
+import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import {
+  ArrowDown,
+  Award,
+  Code2,
+  Download,
+  ExternalLink,
+  Github,
+  GraduationCap,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Send,
+  Twitter,
+} from "lucide-react";
+import React, { useState } from "react";
+import {
+  CopyrightFooter,
+  CopyrightProtection,
+} from "../components/CopyrightProtection";
+import { ParticleBackground } from "../components/ParticleBackground";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
+import { useToast } from "../hooks/use-toast";
 
 // Initialize EmailJS with the public key
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
 // Import your profile image
-import profileImage from '../assets/profile.jpg';
+import profileImage from "../assets/profile.jpg";
 // Resume file is now served from public folder
-
 
 // Static Data
 const SOCIAL_LINKS = [
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/sahayasavari', label: 'LinkedIn' },
-  { icon: Instagram, href: 'https://instagram.com/_itz_me_santhoz', label: 'Instagram' },
-  { icon: Github, href: 'https://github.com/aka-sahayasavari', label: 'GitHub' },
-  { icon: MessageCircle, href: 'https://wa.me/918667520029', label: 'WhatsApp' },
-  { icon: Twitter, href: 'https://x.com/_itz_me_santhoz', label: 'X (Twitter)' },
-  { icon: Code2, href: 'https://leetcode.com/u/sahaya_savari/', label: 'LeetCode' },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/sahayasavari",
+    label: "LinkedIn",
+  },
+  {
+    icon: Instagram,
+    href: "https://instagram.com/_itz_me_santhoz",
+    label: "Instagram",
+  },
+  {
+    icon: Github,
+    href: "https://github.com/aka-sahayasavari",
+    label: "GitHub",
+  },
+  {
+    icon: MessageCircle,
+    href: "https://wa.me/918667520029",
+    label: "WhatsApp",
+  },
+  {
+    icon: Twitter,
+    href: "https://x.com/_itz_me_santhoz",
+    label: "X (Twitter)",
+  },
+  {
+    icon: Code2,
+    href: "https://leetcode.com/u/sahaya_savari/",
+    label: "LeetCode",
+  },
 ];
 
 const SKILLS = {
   technical: [
-    { name: 'Python', level: 85 },
-    { name: 'C/C++', level: 70 },
-    { name: 'Java', level: 75 },
-    { name: 'HTML/CSS', level: 80 },
-    { name: 'Data Analysis', level: 75 },
-    { name: 'Coding', level: 70 }
+    { name: "Python", level: 85 },
+    { name: "C/C++", level: 70 },
+    { name: "Java", level: 75 },
+    { name: "HTML/CSS", level: 80 },
+    { name: "Data Analysis", level: 75 },
+    { name: "Coding", level: 70 },
   ],
-  tools: [
-    'Power BI', 'Excel', 'Eclipse', 'Weka', 'Google Colab', 'R-Studio'
-  ],
+  tools: ["Power BI", "Excel", "Eclipse", "Weka", "Google Colab", "R-Studio"],
   soft: [
-    'Communication', 'Team Collaboration', 'Adaptability', 'Problem-Solving'
-  ]
+    "Communication",
+    "Team Collaboration",
+    "Adaptability",
+    "Problem-Solving",
+  ],
 };
 
 const PROJECTS = [
   {
-    title: 'Data Analytics Dashboard',
-    description: 'Interactive dashboard for data visualization using Power BI and Python',
-    tech: ['Python', 'Power BI', 'Data Analysis'],
-    github: 'https://github.com/aka-sahayasavari/data-analytics-dashboard',
-    demo: 'https://aka-sahayasavari.github.io/data-analytics-dashboard'
+    title: "Data Analytics Dashboard",
+    description:
+      "Interactive dashboard for data visualization using Power BI and Python",
+    tech: ["Python", "Power BI", "Data Analysis"],
+    github: "https://github.com/aka-sahayasavari/data-analytics-dashboard",
+    demo: "https://aka-sahayasavari.github.io/data-analytics-dashboard",
   },
   {
-    title: 'ML Prediction Model',
-    description: 'Machine learning model for predictive analysis using various algorithms',
-    tech: ['Python', 'Scikit-learn', 'Pandas'],
-    github: 'https://github.com/aka-sahayasavari/ml-prediction-model',
-    demo: 'https://aka-sahayasavari.github.io/ml-prediction-model'
+    title: "ML Prediction Model",
+    description:
+      "Machine learning model for predictive analysis using various algorithms",
+    tech: ["Python", "Scikit-learn", "Pandas"],
+    github: "https://github.com/aka-sahayasavari/ml-prediction-model",
+    demo: "https://aka-sahayasavari.github.io/ml-prediction-model",
   },
   {
-    title: 'Web Portfolio',
-    description: 'Responsive portfolio website with modern design and animations',
-    tech: ['React', 'Tailwind CSS', 'Framer Motion'],
-    github: 'https://github.com/aka-sahayasavari/Sahaya_Savari_F-portfolio',
-    demo: 'https://sahayasavari.web.app'
-  }
+    title: "Web Portfolio",
+    description:
+      "Responsive portfolio website with modern design and animations",
+    tech: ["React", "Tailwind CSS", "Framer Motion"],
+    github: "https://github.com/sahaya-savari/MY-PORTFOLIO.git",
+    demo: "https://sahayasavari.web.app",
+  },
 ];
 
 const EDUCATION = [
   {
-    degree: 'M.Sc Artificial Intelligence',
+    degree: "M.Sc Artificial Intelligence",
     institution: "St. Joseph's College, Trichy",
-    duration: '2025 - 2027',
-    percentage: 'Pursuing'
+    duration: "2025 - 2027",
+    percentage: "Pursuing",
   },
   {
-    degree: 'B.Sc Data Science',
-    institution: 'Thiagarajar College of Arts and Science',
-    duration: '2022 - 2025',
-    percentage: '65.3%'
+    degree: "B.Sc Data Science",
+    institution: "Thiagarajar College of Arts and Science",
+    duration: "2022 - 2025",
+    percentage: "65.3%",
   },
   {
-    degree: 'Higher Secondary in Bio-Maths',
+    degree: "Higher Secondary in Bio-Maths",
     institution: "St.Mary's Higher Secondary School",
-    duration: '2021 - 2022',
-    percentage: '78.33%'
+    duration: "2021 - 2022",
+    percentage: "78.33%",
   },
   {
-    degree: 'High School',
+    degree: "High School",
     institution: "St.Mary's Higher Secondary School",
-    duration: '2019 - 2020',
-    percentage: '85%'
-  }
+    duration: "2019 - 2020",
+    percentage: "85%",
+  },
 ];
 
 const CERTIFICATIONS = [
-  'IBM Data Analyst course - Coursera',
+  "IBM Data Analyst course - Coursera",
   "Honor's Diploma in Information Technology - CCE Computer Education",
-  'Mastering Excel Data Analysis & Dashboard Reporting - UDEMY'
+  "Mastering Excel Data Analysis & Dashboard Reporting - UDEMY",
 ];
 
 export function PortfolioHome() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Environment Credentials
     const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY; 
-    
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
     try {
       const templateParams = {
         from_name: formData.name.trim(),
         from_email: formData.email.trim(),
         message: formData.message.trim(),
       };
-      
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        templateParams,
-        PUBLIC_KEY
-      );
-      
-      alert('SUCCESS! Your message has been sent.');
-      setFormData({ name: '', email: '', message: '' });
-      
+
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      alert("SUCCESS! Your message has been sent.");
+      setFormData({ name: "", email: "", message: "" });
     } catch (err: unknown) {
       const error = err as { text?: string; message?: string };
-      console.error('[EmailJS] Error:', error);
-      const errorMsg = error?.text || error?.message || 'Check your Public Key and Template settings';
-      alert('FAILED... Error: ' + errorMsg);
+      console.error("[EmailJS] Error:", error);
+      const errorMsg =
+        error?.text ||
+        error?.message ||
+        "Check your Public Key and Template settings";
+      alert("FAILED... Error: " + errorMsg);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -161,17 +211,20 @@ export function PortfolioHome() {
     if (element) {
       // Enhanced scroll behavior for better mobile support
       const offsetTop = element.offsetTop - 80;
-      window.scrollTo({ 
-        top: offsetTop, 
-        behavior: 'smooth' 
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth",
       });
-      
+
       // Alternative method for better mobile compatibility
-      if (!window.scrollTo || window.scrollTo.toString().indexOf('[native code]') === -1) {
-        element.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start',
-          inline: 'nearest'
+      if (
+        !window.scrollTo ||
+        window.scrollTo.toString().indexOf("[native code]") === -1
+      ) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
         });
       }
     }
@@ -180,7 +233,10 @@ export function PortfolioHome() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-4 py-8 pt-20 relative overflow-hidden">
+      <section
+        id="home"
+        className="min-h-screen flex items-center justify-center px-4 py-8 pt-20 relative overflow-hidden"
+      >
         <ParticleBackground />
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
           <motion.div
@@ -194,7 +250,10 @@ export function PortfolioHome() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight"
-              style={{ fontFamily: 'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+              style={{
+                fontFamily:
+                  'Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              }}
             >
               <div className="mb-2">Hi, I'm</div>
               <span className="text-gradient bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent block">
@@ -207,7 +266,10 @@ export function PortfolioHome() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-medium mt-4"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+              style={{
+                fontFamily:
+                  'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              }}
             >
               M.Sc Artificial Intelligence Student | Future AI Engineer
             </motion.p>
@@ -217,11 +279,17 @@ export function PortfolioHome() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
               className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-6"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+              style={{
+                fontFamily:
+                  'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              }}
             >
-              MSc Artificial Intelligence student passionate about transforming complex data into actionable insights and developing intelligent systems. 
-              Experienced in Python, Machine Learning, and Data Analytics, with a strong foundation in AI research and applications. 
-              Ready to contribute to innovative AI solutions that shape the future.
+              MSc Artificial Intelligence student passionate about transforming
+              complex data into actionable insights and developing intelligent
+              systems. Experienced in Python, Machine Learning, and Data
+              Analytics, with a strong foundation in AI research and
+              applications. Ready to contribute to innovative AI solutions that
+              shape the future.
             </motion.p>
 
             <motion.div
@@ -230,17 +298,21 @@ export function PortfolioHome() {
               transition={{ delay: 0.8, duration: 0.8 }}
               className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start mt-8"
             >
-              <Button 
-                onClick={() => scrollToSection('projects')}
+              <Button
+                onClick={() => scrollToSection("projects")}
                 className="bg-primary hover:bg-primary/90 glow-effect"
               >
                 View Projects
               </Button>
-              
-              <Button asChild variant="outline" className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground">
-                <a 
-                  href="/SAHAYASAVARI_FINAL_RESUME.pdf" 
-                  target="_blank" 
+
+              <Button
+                asChild
+                variant="outline"
+                className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground"
+              >
+                <a
+                  href="/SAHAYASAVARI_FINAL_RESUME.pdf"
+                  target="_blank"
                   rel="noopener noreferrer"
                   aria-label="View resume in new tab"
                 >
@@ -248,10 +320,14 @@ export function PortfolioHome() {
                   View Resume
                 </a>
               </Button>
-              
-              <Button asChild variant="outline" className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground">
-                <a 
-                  href="/SAHAYASAVARI_FINAL_RESUME.pdf" 
+
+              <Button
+                asChild
+                variant="outline"
+                className="border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground bg-background/90 dark:bg-background/90 dark:text-foreground"
+              >
+                <a
+                  href="/SAHAYASAVARI_FINAL_RESUME.pdf"
                   download="SAHAYASAVARI_FINAL_RESUME.pdf"
                   aria-label="Download resume PDF"
                 >
@@ -285,10 +361,7 @@ export function PortfolioHome() {
             transition={{ duration: 0.8 }}
             className="flex justify-center order-1 lg:order-2 lg:justify-end items-center"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="relative group"
-            >
+            <motion.div whileHover={{ scale: 1.05 }} className="relative group">
               <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full overflow-hidden glass-card glow-effect animate-float relative bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm">
                 <div className="absolute inset-3 rounded-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-1 shadow-2xl">
                   <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-100 dark:to-slate-200 p-1">
@@ -302,11 +375,11 @@ export function PortfolioHome() {
                         className="w-full h-full object-cover object-center profile-image-enhanced transition-all duration-500 group-hover:scale-110 absolute inset-0 z-10"
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          img.style.display = 'none';
+                          img.style.display = "none";
                         }}
                         onLoad={(e) => {
                           const img = e.target as HTMLImageElement;
-                          img.style.display = 'block';
+                          img.style.display = "block";
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 dark:to-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none" />
@@ -314,7 +387,7 @@ export function PortfolioHome() {
                   </div>
                 </div>
               </div>
-              
+
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -339,9 +412,11 @@ export function PortfolioHome() {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center text-muted-foreground cursor-pointer touch-manipulation"
-            onClick={() => scrollToSection('about')}
+            onClick={() => scrollToSection("about")}
           >
-            <span className="text-xs sm:text-sm mb-2 select-none">Scroll to explore</span>
+            <span className="text-xs sm:text-sm mb-2 select-none">
+              Scroll to explore
+            </span>
             <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5" />
           </motion.div>
         </motion.div>
@@ -360,7 +435,8 @@ export function PortfolioHome() {
               About <span className="text-gradient">Me</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              A passionate Artificial Intelligence student from Madurai, Tamil Nadu, dedicated to learning and innovation
+              A passionate Artificial Intelligence student from Madurai, Tamil
+              Nadu, dedicated to learning and innovation
             </p>
           </motion.div>
 
@@ -379,9 +455,13 @@ export function PortfolioHome() {
                   <Card key={index} className="glass-card">
                     <CardContent className="p-4">
                       <h4 className="font-semibold">{edu.degree}</h4>
-                      <p className="text-muted-foreground text-sm">{edu.institution}</p>
+                      <p className="text-muted-foreground text-sm">
+                        {edu.institution}
+                      </p>
                       <div className="flex justify-between items-center mt-2">
-                        <span className="text-sm text-muted-foreground">{edu.duration}</span>
+                        <span className="text-sm text-muted-foreground">
+                          {edu.duration}
+                        </span>
                         <Badge variant="secondary">{edu.percentage}</Badge>
                       </div>
                     </CardContent>
@@ -420,9 +500,9 @@ export function PortfolioHome() {
             <h3 className="text-2xl font-bold mb-6 text-center">Soft Skills</h3>
             <div className="flex flex-wrap justify-center gap-4">
               {SKILLS.soft.map((skill, index) => (
-                <Badge 
-                  key={index} 
-                  variant="outline" 
+                <Badge
+                  key={index}
+                  variant="outline"
                   className="px-6 py-3 text-base sm:text-lg hover:bg-primary/10 transition-colors cursor-default"
                 >
                   {skill}
@@ -434,7 +514,10 @@ export function PortfolioHome() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="min-h-screen py-20 px-4 bg-muted/30 bg-mesh-gradient">
+      <section
+        id="skills"
+        className="min-h-screen py-20 px-4 bg-muted/30 bg-mesh-gradient"
+      >
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -459,7 +542,9 @@ export function PortfolioHome() {
                   <div key={index}>
                     <div className="flex justify-between mb-2">
                       <span className="font-medium">{skill.name}</span>
-                      <span className="text-muted-foreground">{skill.level}%</span>
+                      <span className="text-muted-foreground">
+                        {skill.level}%
+                      </span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
                       <motion.div
@@ -539,7 +624,7 @@ export function PortfolioHome() {
                     </div>
                     <div className="flex gap-3">
                       <Button asChild size="sm" variant="outline">
-                        <a 
+                        <a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -549,7 +634,7 @@ export function PortfolioHome() {
                         </a>
                       </Button>
                       <Button asChild size="sm">
-                        <a 
+                        <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -585,16 +670,17 @@ export function PortfolioHome() {
             {[
               {
                 title: "Getting Started with Machine Learning",
-                excerpt: "A beginner's guide to understanding the fundamentals of machine learning.",
+                excerpt:
+                  "A beginner's guide to understanding the fundamentals of machine learning.",
                 readTime: "5 min read",
-                date: "Dec 15, 2024"
+                date: "Dec 15, 2024",
               },
               {
                 title: "Data Visualization Best Practices",
                 excerpt: "Learn how to create compelling data visualizations.",
                 readTime: "7 min read",
-                date: "Dec 10, 2024"
-              }
+                date: "Dec 10, 2024",
+              },
             ].map((article, index) => (
               <motion.div
                 key={index}
@@ -607,7 +693,9 @@ export function PortfolioHome() {
                   <CardHeader>
                     <div className="flex justify-between items-start mb-2">
                       <Badge variant="outline">{article.readTime}</Badge>
-                      <span className="text-sm text-muted-foreground">{article.date}</span>
+                      <span className="text-sm text-muted-foreground">
+                        {article.date}
+                      </span>
                     </div>
                     <CardTitle className="hover:text-primary transition-colors">
                       {article.title}
@@ -625,7 +713,10 @@ export function PortfolioHome() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen py-20 px-4 relative overflow-hidden">
+      <section
+        id="contact"
+        className="min-h-screen py-20 px-4 relative overflow-hidden"
+      >
         <ParticleBackground />
         <div className="max-w-4xl mx-auto relative z-10">
           <motion.div
@@ -708,13 +799,13 @@ export function PortfolioHome() {
                     required
                     disabled={isSubmitting}
                   />
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     disabled={isSubmitting}
                     className="w-full"
                   >
                     <Send className="mr-2 h-4 w-4" />
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
