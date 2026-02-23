@@ -238,7 +238,7 @@ export function PortfolioHome() {
         className="min-h-screen flex items-center justify-center px-4 py-8 pt-20 relative overflow-hidden"
       >
         <ParticleBackground />
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center lg:items-start relative z-10">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -359,32 +359,27 @@ export function PortfolioHome() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center order-1 lg:order-2 lg:justify-end items-center"
+            className="flex justify-center order-1 lg:order-2 lg:justify-end items-start lg:pt-10"
           >
             <motion.div whileHover={{ scale: 1.05 }} className="relative group">
-              <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full overflow-hidden glass-card glow-effect animate-float relative bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm">
-                <div className="absolute inset-3 rounded-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 p-1 shadow-2xl">
-                  <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-100 dark:to-slate-200 p-1">
-                    <div className="w-full h-full rounded-full overflow-hidden bg-background relative shadow-inner">
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary text-primary-foreground text-4xl sm:text-5xl md:text-6xl font-bold absolute inset-0 z-0 pointer-events-none">
-                        SS
-                      </div>
-                      <img
-                        src={profileImage}
-                        alt="Sahaya Savari Profile"
-                        className="w-full h-full object-cover object-center profile-image-enhanced transition-all duration-500 group-hover:scale-110 absolute inset-0 z-10"
-                        onError={(e) => {
-                          const img = e.target as HTMLImageElement;
-                          img.style.display = "none";
-                        }}
-                        onLoad={(e) => {
-                          const img = e.target as HTMLImageElement;
-                          img.style.display = "block";
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 dark:to-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none" />
-                    </div>
+              <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full animate-float relative p-[6px] bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 shadow-2xl glow-effect">
+                <div className="w-full h-full rounded-full overflow-hidden bg-background relative">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary text-primary-foreground text-4xl sm:text-5xl md:text-6xl font-bold absolute inset-0 z-0 pointer-events-none">
+                    SS
                   </div>
+                  <img
+                    src={profileImage}
+                    alt="Sahaya Savari Profile"
+                    className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110 absolute inset-0 z-10"
+                    onError={(e) => {
+                      const img = e.target as HTMLImageElement;
+                      img.style.display = "none";
+                    }}
+                    onLoad={(e) => {
+                      const img = e.target as HTMLImageElement;
+                      img.style.display = "block";
+                    }}
+                  />
                 </div>
               </div>
 
