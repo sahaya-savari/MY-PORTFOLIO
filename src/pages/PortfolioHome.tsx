@@ -56,7 +56,7 @@ const SOCIAL_LINKS = [
   },
   {
     icon: Github,
-    href: "https://github.com/aka-sahayasavari",
+    href: "https://github.com/sahaya-savari",
     label: "GitHub",
   },
   {
@@ -100,16 +100,16 @@ const PROJECTS = [
     description:
       "Interactive dashboard for data visualization using Power BI and Python",
     tech: ["Python", "Power BI", "Data Analysis"],
-    github: "https://github.com/aka-sahayasavari/data-analytics-dashboard",
-    demo: "https://aka-sahayasavari.github.io/data-analytics-dashboard",
+    github: "https://github.com/sahaya-savari/data-analytics-dashboard",
+    demo: "https://sahaya-savari.github.io/data-analytics-dashboard",
   },
   {
     title: "ML Prediction Model",
     description:
       "Machine learning model for predictive analysis using various algorithms",
     tech: ["Python", "Scikit-learn", "Pandas"],
-    github: "https://github.com/aka-sahayasavari/ml-prediction-model",
-    demo: "https://aka-sahayasavari.github.io/ml-prediction-model",
+    github: "https://github.com/sahaya-savari/ml-prediction-model",
+    demo: "https://sahaya-savari.github.io/ml-prediction-model",
   },
   {
     title: "Web Portfolio",
@@ -662,12 +662,14 @@ export function PortfolioHome() {
                   "A beginner's guide to understanding the fundamentals of machine learning.",
                 readTime: "5 min read",
                 date: "Dec 15, 2024",
+                link: "https://sahaya-savari.github.io/blog/machine-learning-basics",
               },
               {
                 title: "Data Visualization Best Practices",
                 excerpt: "Learn how to create compelling data visualizations.",
                 readTime: "7 min read",
                 date: "Dec 10, 2024",
+                link: "https://sahaya-savari.github.io/blog/data-visualization-tips",
               },
             ].map((article, index) => (
               <motion.div
@@ -691,7 +693,11 @@ export function PortfolioHome() {
                     <CardDescription>{article.excerpt}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button variant="ghost">Read More →</Button>
+                    <Button asChild variant="ghost">
+                      <a href={article.link} target="_blank" rel="noopener noreferrer">
+                        Read More →
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
               </motion.div>
