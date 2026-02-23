@@ -537,24 +537,17 @@ export function PortfolioHome() {
               transition={{ duration: 0.8 }}
             >
               <h3 className="text-2xl font-bold mb-6">Technical Skills</h3>
-              <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
                 {SKILLS.technical.map((skill, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between mb-2">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-muted-foreground">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: index * 0.1 }}
-                        className="bg-gradient-to-r from-primary to-primary/80 h-2 rounded-full"
-                      />
-                    </div>
-                  </div>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="glass-card p-4 text-center hover:glow-effect transition-all duration-300"
+                  >
+                    <span className="font-medium">{skill.name}</span>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
